@@ -56,3 +56,26 @@ makeComplete(Tree,Value,Result):-
     makeComplete(R,Val,Right),
     Result = t(Left,X,Right).
 
+g(Term):-
+    assert(tmp(Term)),
+    assert(tmp(g)),
+    retract(tmp(Term1)),
+    Term1==Term.
+
+psecond(X,List):-
+    append(L1,_,List),
+    append(_,X,L1).
+
+conjunction([],[],[]):-!.
+conjunction(List,[],List).
+conjunction(List1,List2,Res) :-
+    List1 = [Head1|Tail1],
+    List2=[Head2|Tail2],
+    atom_concat(Head1,Head2,AtomRes),
+    conjunction(Tail1,Tail2,NewRes),
+    Res=[AtomRes|NewRes].
+conjunction(List,Res):-
+    List=[Head|Tail],
+    conjunction(Tail,Res1),
+    conjunction(Head,Res1,Res),!.
+conjunction(_,[]).
