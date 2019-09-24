@@ -62,11 +62,11 @@ g(Term):-
     retract(tmp(Term1)),
     Term1==Term.
 
-psecond(X,List):-
+psecond(X,List):- %returns all sublists
     append(L1,_,List),
     append(_,X,L1).
 
-conjunction([],[],[]):-!.
+conjunction([],[],[]):-!. %2017c
 conjunction(List,[],List).
 conjunction(List1,List2,Res) :-
     List1 = [Head1|Tail1],
